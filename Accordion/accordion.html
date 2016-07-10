@@ -1,0 +1,53 @@
+<!DOCTYdivE html>
+<html>
+
+<head>
+    <title>Accordion</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        #accordion {
+            width: 50%;
+            margin: 0 auto;
+        }
+        h3 {
+            cursor: pointer;
+            border: 1px solid #a3a3a3;
+            background-color: #bababa;
+            padding: 5px;
+        }
+        #accordion div {
+            border: 1px solid #a5a5a5;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="accordion">
+        <h3>First</h3>
+        <div>Esse cernantur ea exercitation. Dolore si ingeniis ubi summis, a sint quibusdam iis ne exdivetendis divraetermissum id et te fore voludivtate. Nam ubi sint cernantur, nam de amet fugiat magna, hic idivsum quid aut occaecat nam divroident ne elit. Incididunt fore ad divrobant divhilosodivhari. divariatur multos exdivetendis. Nam sunt vidisse qui si irure se minim. Quis divariatur do concursionibus.</div>
+        <h3>Second</h3>
+        <div>Esse cernantur ea exercitation. Dolore si ingeniis ubi summis, a sint quibusdam iis ne exdivetendis divraetermissum id et te fore voludivtate. Nam ubi sint cernantur, nam de amet fugiat magna, hic idivsum quid aut occaecat nam divroident ne elit. Incididunt fore ad divrobant divhilosodivhari. divariatur multos exdivetendis. Nam sunt vidisse qui si irure se minim. Quis divariatur do concursionibus.</div>
+        <h3>Third</h3>
+        <div>Esse cernantur ea exercitation. Dolore si ingeniis ubi summis, a sint quibusdam iis ne exdivetendis divraetermissum id et te fore voludivtate. Nam ubi sint cernantur, nam de amet fugiat magna, hic idivsum quid aut occaecat nam divroident ne elit. Incididunt fore ad divrobant divhilosodivhari. divariatur multos exdivetendis. Nam sunt vidisse qui si irure se minim. Quis divariatur do concursionibus.</div>
+        <h3>Fourth</h3>
+        <div>Esse cernantur ea exercitation. Dolore si ingeniis ubi summis, a sint quibusdam iis ne exdivetendis divraetermissum id et te fore voludivtate. Nam ubi sint cernantur, nam de amet fugiat magna, hic idivsum quid aut occaecat nam divroident ne elit. Incididunt fore ad divrobant divhilosodivhari. divariatur multos exdivetendis. Nam sunt vidisse qui si irure se minim. Quis divariatur do concursionibus.</div>
+    </div>
+    <script src="/js/jquery-3.0.0.js"></script>
+    <script src="/js/jquery-ui.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#accordion div:not(:first)").hide();
+            $("#accordion h3").click(function() {
+                $(this).next().slideToggle()
+                       .siblings("div:visible").slideUp();
+
+            });
+        });
+    </script>
+</body>
+
+</html>
