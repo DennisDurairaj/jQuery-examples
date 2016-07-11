@@ -50,7 +50,7 @@
 <body>
     <div class="container">
         <div class="score">
-            <span class="score-value">Number of tries: </span>
+            <span>Number of tries: </span>
             <span class="score-value">0 </span>
             <button type="button" class="btn btn-primary">Reset</button>
         </div>
@@ -76,24 +76,63 @@
             "../Memory-game/images/squirtle.png",
             "../Memory-game/images/meowth.png",
             "../Memory-game/images/rattata.png",
-        ]
+        ];
+        var firstImage = "";
+        var firstImageId = "";
+        var secondImageId = "";
+        var secondImage = "";
+        var tries = 0;
+        var match = 0;
 
         function randomiseImages() {
             var imagesCopy = [];
-            imagesCopy = $.merge($.merge( [], imagesArray ), imagesArray);
-//            console.log(imagesCopy);
+            imagesCopy = $.merge($.merge([], imagesArray), imagesArray);
+            //            console.log(imagesCopy);
             var currentDiv = $("img");
-//            console.log(currentDiv);
-            for(var j=0; j<imagesArray.length*2; j++) {
-                var randomNum = Math.floor(Math.random()*imagesCopy.length);
-//                console.log(currentDiv[j].src);
+            //            console.log(currentDiv);
+            for (var j = 0; j < imagesArray.length * 2; j++) {
+                var randomNum = Math.floor(Math.random() * imagesCopy.length);
+                //                console.log(currentDiv[j].src);
                 currentDiv[j].src = imagesCopy[randomNum];
                 imagesCopy.splice(randomNum, 1);
             }
         }
 
-        function openCard {
-
+        function openCard() {
+            if ($(this).find("img").is(":hidden")) {
+                $(this).find("img").show();
+                //                console.log($(this).attr("id"));
+                if (firstImage == "") {
+                    firstImage = $(this).find("img").attr("src");
+                    firstImageId = $(this).attr("id");
+                    console.log(firstImage);
+                } else {
+                    secondImage = $(this).find("img").attr("src");
+                    secondImageId = $(this).attr("id");
+                    //                    console.log( $("#"+firstImageId).find("img"));
+                    if (firstImage != secondImage) {
+                        setTimeout(function() {
+                            $("#" + firstImageId).find("img").hide("slow");
+                            $("#" + secondImageId).find("img").hide("slow");
+                            firstImage = "";
+                            secondImage = "";
+                            firstImageId = "";
+                            secondImageId = "";
+                        }, 500)
+                    } else {
+                        firstImage = "";
+                        secondImage = "";
+                        firstImageId = "";
+                        secondImageId = "";
+                        match++;
+                    }
+                }
+            }
+            tries++;
+            $(".score-value").html(tries);
+            if (imagesArray.length == match) {
+                alert("You completed the game in " + tries + " tries");
+            }
         }
 
         $(document).ready(function() {
@@ -102,13 +141,25 @@
                 $.each(imagesArray, function(index, value) {
                     if (index == 6) {
                         $(".images").append("<div class = row></div>");
-                        $(".images > div:last").append("<div class= col-md-2><img src=" + value + "></div>");
+                        $(".images > div:last").append("<div class= col-md-2 id= card" + i + index + "><img src=" + value + "></div>");
                     } else {
-                        $(".images > div:last").append("<div class= col-md-2><img src=" + value + "></div>");
+                        $(".images > div:last").append("<div class= col-md-2 id =card" + i + index + "><img src=" + value + "></div>");
                     }
                 });
             }
             randomiseImages();
+            $(".col-md-2").click(openCard);
+            $("button").click(function() {
+                randomiseImages();
+                $(".col-md-2 img").hide();
+                firstImage = "";
+                firstImageId = "";
+                secondImageId = "";
+                secondImage = "";
+                tries = 0;
+                $(".score-value").html(tries);
+                match = 0;
+            })
         });
     </script>
 </body>
